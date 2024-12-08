@@ -11,7 +11,7 @@ const TOKEN = process.env.TOKEN;
 // Scheduled message times (UTC)
 const scheduleTimes = [
     { hour: 12, minute: 50 }, 
-    { hour: 14, minute: 3 }, // 14:41 Serbia Time (13:41 UTC)
+    { hour: 15, minute: 50 },
     { hour: 19, minute: 50 }, 
     { hour: 22, minute: 50 }, 
     { hour: 0, minute: 50 },  
