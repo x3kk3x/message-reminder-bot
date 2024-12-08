@@ -10,11 +10,11 @@ const TOKEN = process.env.TOKEN;
 
 // Scheduled message times (UTC)
 const scheduleTimes = [
-    { hour: 12, minute: 50 }, 
-    { hour: 15, minute: 50 },
-    { hour: 19, minute: 50 }, 
-    { hour: 22, minute: 50 }, 
-    { hour: 0, minute: 50 },  
+    { hour: 11, minute: 50 }, 
+    { hour: 14, minute: 50 },
+    { hour: 18, minute: 50 }, 
+    { hour: 21, minute: 50 }, 
+    { hour: 23, minute: 50 },  
 ];
 
 // Function to send messages
