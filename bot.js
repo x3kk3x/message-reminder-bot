@@ -2,6 +2,7 @@ require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const { scheduleJob } = require('node-schedule');
 
+// Create a client instance (the bot)
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // Bot token
@@ -9,11 +10,11 @@ const TOKEN = process.env.TOKEN;
 
 // Scheduled message times (UTC)
 const scheduleTimes = [
-    { hour: 11, minute: 50 },
-    { hour: 15, minute: 50 },
-    { hour: 19, minute: 50 },
-    { hour: 21, minute: 50 },
-    { hour: 0, minute: 50 },
+    { hour: 10, minute: 50 }, 
+    { hour: 14, minute: 50 },
+    { hour: 18, minute: 50 }, 
+    { hour: 20, minute: 50 }, 
+    { hour: 23, minute: 50 },  
 ];
 
 // Function to send messages
@@ -26,37 +27,25 @@ const sendMessage = (channelId, title, message, time) => {
     }
 };
 
-let sleepTimeout;
+// Serverless handler
+module.exports = async (req, res) => {
+    client.once('ready', () => {
+        console.log(`Logged in as ${client.user.tag}`);
 
-// Function to make the bot sleep (pause activity)
-const sleepBot = () => {
-    console.log('Bot is idle, sleeping...');
-    if (sleepTimeout) clearTimeout(sleepTimeout); // Clear any pending task
-    sleepTimeout = setTimeout(() => {
-        console.log('Bot is waking up!');
-        // This will wake up the bot when it's time to perform tasks.
-    }, 1000 * 60 * 60 * 24); // Sleep for 24 hours
-};
+        const channelId = '1314574900522127423'; // The target channel ID
+        const title = 'World Boss Reminder - Find a Party!';
+        const message = 'Boss spawning reminder @Fateveawer, in 10 minutes we go in!';
 
-client.once('ready', () => {
-    console.log(`Logged in as ${client.user.tag}`);
-
-    const channelId = '1314574900522127423'; // Change to your channel ID
-
-    // Message details
-    const title = 'World Boss Reminder - Find a Party!';
-    const message = 'Boss spawning reminder, in 10 minutes we go in!';
-
-    // Schedule jobs for each time
-    scheduleTimes.forEach((time) => {
-        const formattedTime = `${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')} UTC`;
-        scheduleJob({ hour: time.hour, minute: time.minute }, () => {
-            sendMessage(channelId, title, message, formattedTime);
+        // Schedule jobs for each time
+        scheduleTimes.forEach((time) => {
+            const formattedTime = `${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')} UTC`;
+            scheduleJob({ hour: time.hour, minute: time.minute }, () => {
+                sendMessage(channelId, title, message, formattedTime);
+            });
         });
     });
 
-    // Make the bot sleep if it is idle for long periods
-    sleepBot();
-});
+    await client.login(TOKEN);
 
-client.login(TOKEN);
+    res.send({ message: 'Scheduled messages are now set!' });
+};
