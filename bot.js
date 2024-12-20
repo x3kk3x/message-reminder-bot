@@ -27,15 +27,17 @@ const sendMessage = (channelId, title, message) => {
         console.error(`Channel with ID ${channelId} not found.`);
     }
 };
-
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 
     const channelId = '1314574900522127423';
     const title = 'World Boss Reminder';
     const message =
-        'The world boss will be spawning soon!' +
-        'Like brushing off the sleep from your eyes or checking your phone for the hundredth time, the clock is ticking. The battle is coming—are you prepared? The world outside hums with its distractions, but soon, your focus will narrow. Gather your thoughts, sharpen your resolve, and face what’s to come.';
+        'The world boss will be spawning soon!\n' +
+        'Like brushing off the sleep from your eyes or checking your phone for the hundredth time, the clock is ticking.\n' +
+        'The battle is coming — are you prepared?\n' +
+        'The world outside hums with its distractions, but soon, your focus will narrow.\n' +
+        'Gather your thoughts, sharpen your resolve, and face what’s to come.';
 
     scheduleTimes.forEach((time) => {
         scheduleJob({ hour: time.hour, minute: time.minute }, () => {
