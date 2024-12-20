@@ -2,9 +2,9 @@ require('dotenv').config();
 const { Client, GatewayIntentBits } = require('discord.js');
 const { scheduleJob } = require('node-schedule');
 
-const client = new Client({ 
+const client = new Client({
     intents: [
-        GatewayIntentBits.Guilds, 
+        GatewayIntentBits.Guilds,
         GatewayIntentBits.MessageContent
     ]
 });
@@ -12,17 +12,17 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 
 const scheduleTimes = [
-    { hour: 10, minute: 50 }, 
+    { hour: 10, minute: 50 },
     { hour: 14, minute: 50 },
-    { hour: 18, minute: 50 }, 
-    { hour: 20, minute: 50 }, 
-    { hour: 23, minute: 50 },  
+    { hour: 18, minute: 50 },
+    { hour: 20, minute: 50 },
+    { hour: 23, minute: 50 },
 ];
 
-const sendMessage = (channelId, title, message, time) => {
+const sendMessage = (channelId, title, message) => {
     const channel = client.channels.cache.get(channelId);
     if (channel) {
-        channel.send(`**${title}**\n\n${message}\n\n**Time:** ${time}`);
+        channel.send(`**${title}**\n\n${message}`);
     } else {
         console.error(`Channel with ID ${channelId} not found.`);
     }
@@ -31,14 +31,15 @@ const sendMessage = (channelId, title, message, time) => {
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 
-    const channelId = '1314574900522127423'; 
-    const title = 'World Boss Reminder - Find a Party!';
-    const message = 'Boss spawning reminder @Fateweaver, in 10 minutes we go in!';
+    const channelId = '1314574900522127423';
+    const title = 'World Boss Reminder';
+    const message =
+        'The world boss will be spawning soon!' +
+        'Like brushing off the sleep from your eyes or checking your phone for the hundredth time, the clock is ticking. The battle is coming—are you prepared? The world outside hums with its distractions, but soon, your focus will narrow. Gather your thoughts, sharpen your resolve, and face what’s to come.';
 
     scheduleTimes.forEach((time) => {
-        const formattedTime = `${String(time.hour).padStart(2, '0')}:${String(time.minute).padStart(2, '0')} UTC`;
         scheduleJob({ hour: time.hour, minute: time.minute }, () => {
-            sendMessage(channelId, title, message, formattedTime);
+            sendMessage(channelId, title, message);
         });
     });
 });
