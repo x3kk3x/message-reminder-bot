@@ -27,6 +27,7 @@ const sendMessage = (channelId, title, message) => {
         console.error(`Channel with ID ${channelId} not found.`);
     }
 };
+
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 
@@ -35,7 +36,8 @@ client.once('ready', () => {
     const message =
         'THE WORLD BOSS WILL BE SPAWNING SOON!\n \n' +
         'Like brushing off the sleep from your eyes or checking your phone for the hundredth time, the clock is ticking.\n' +
-        'The battle is coming — are you prepared?\n \n' +
+        'The battle is coming — are you prepared?\n \n';
+
     scheduleTimes.forEach((time) => {
         scheduleJob({ hour: time.hour, minute: time.minute }, () => {
             sendMessage(channelId, title, message);
