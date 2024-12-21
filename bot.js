@@ -32,7 +32,7 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 
     client.user.setPresence({
-        activities: [{ name: 'And scratching head over boss precise time⏰' }],
+        activities: [{ name: 'Which Boss is it? 👺' }],
         status: 'online'
     });
 
