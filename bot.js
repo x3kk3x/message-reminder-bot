@@ -12,7 +12,7 @@ const client = new Client({
 const TOKEN = process.env.TOKEN;
 
 const scheduleTimes = [
-    { hour: 10, minute: 50 },
+    { hour: 11, minute: 50 },
     { hour: 14, minute: 50 },
     { hour: 18, minute: 50 },
     { hour: 20, minute: 50 },
@@ -33,12 +33,9 @@ client.once('ready', () => {
     const channelId = '1314574900522127423';
     const title = 'World Boss Reminder';
     const message =
-        'The world boss will be spawning soon!\n' +
+        'THE WORLD BOSS WILL BE SPAWNING SOON!\n \n' +
         'Like brushing off the sleep from your eyes or checking your phone for the hundredth time, the clock is ticking.\n' +
-        'The battle is coming — are you prepared?\n' +
-        'The world outside hums with its distractions, but soon, your focus will narrow.\n' +
-        'Gather your thoughts, sharpen your resolve, and face what’s to come.';
-
+        'The battle is coming — are you prepared?\n \n' +
     scheduleTimes.forEach((time) => {
         scheduleJob({ hour: time.hour, minute: time.minute }, () => {
             sendMessage(channelId, title, message);
