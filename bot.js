@@ -31,6 +31,11 @@ const sendMessage = (channelId, title, message) => {
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}`);
 
+    client.user.setPresence({
+        activities: [{ name: 'Scratching head over boss precise time since⏰' }],
+        status: 'online'
+    });
+
     const channelId = '1314574900522127423';
     const title = 'World Boss Reminder';
     const message =
