@@ -32,7 +32,7 @@ const fetchRiddle = async () => {
         return `**Riddle of the Moment:**\n${riddle.question}`;
     } catch (error) {
         console.error('Error fetching riddle:', error);
-        return '**Riddle of the Moment:**\nCould not fetch a riddle at this time. Try again later!';
+        return '**Riddle of the Moment:**\n Could not fetch a riddle at this time. Try again later!';
     }
 };
 
