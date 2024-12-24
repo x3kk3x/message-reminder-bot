@@ -53,7 +53,7 @@ client.once('ready', () => {
 
     // Set bot presence
     client.user.setPresence({
-        activities: [{ name: 'Which Boss is it? 👺' }],
+        activities: [{ name: 'Which Boss is it guys? 👺' }],
         status: 'online'
     });
 
